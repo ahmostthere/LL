@@ -1,0 +1,6 @@
+#/bin/sh
+
+if [[ -e ./bin/main ]]
+then
+	./bin/main
+fi
