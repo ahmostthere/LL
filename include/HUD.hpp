@@ -1,6 +1,7 @@
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <vector>
+#include <iostream>
 
 class HUD : public sf::Drawable
 {

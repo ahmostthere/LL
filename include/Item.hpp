@@ -1,7 +1,9 @@
+#pragma once
 // #include <SFML/Graphics/RenderTarget.hpp>
 // #include <SFML/Graphics/Drawable.hpp>
 // #include <SFML/Graphics/Transformable.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <iostream>
 
 // class Item : public sf::Drawable, public sf::Transformable
 class Item : public sf::RectangleShape
@@ -14,7 +16,7 @@ private:
     //     // target.draw(m_mouseMove, states);
     // }
 public:
-    Item() : sf::RectangleShape(sf::Vector2f(10, 10))
+    Item() : sf::RectangleShape(sf::Vector2f(40, 40))
     {
     }
 
@@ -30,6 +32,7 @@ public:
 
     Item(const sf::Vector2f &size, sf::Vector2f position, sf::Color color) : sf::RectangleShape(size)
     {
+        std::cout << "hello" << std::endl;
         sf::RectangleShape::setPosition(position);
         sf::RectangleShape::setFillColor(color);
     }

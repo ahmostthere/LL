@@ -7,6 +7,7 @@
 
 #include "Item.hpp"
 #include "HUD.hpp"
+#include "ItemFactory.hpp"
 
 class Game
 {
@@ -24,6 +25,7 @@ private:
 
     static sf::CircleShape circle;
     static HUD hud;
+    static ItemFactory If;
 
     static void load();
     static void loop();

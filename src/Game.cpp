@@ -3,7 +3,8 @@
 #include "MouseMovable.hpp"
 
 #include <iostream>
-
+#include <sstream>
+#include <fstream>
 #define WIN_WIDTH 1920
 #define WIN_HEIGHT 1080
 
@@ -15,14 +16,16 @@ sf::Time Game::m_time;
 
 Game::GameState Game::currentGameState;
 
-HUD Game::hud;
 
 // ============ TEST ==================
 sf::CircleShape Game::circle;
+HUD Game::hud;
+
+ItemFactory Game::If;
 
 Item item;
 Item item2(sf::Vector2f(50, 50), sf::Color(0x33, 0x99, 0xaa));
-
+Item a;
 sf::RectangleShape backpack;
 
 sf::Font manaFont;
@@ -43,6 +46,20 @@ void Game::load()
     text.setFillColor(sf::Color::White);
     text.setCharacterSize(36);
     text.setPosition(1500, 350);
+
+    std::ifstream infile;
+    std::string line;
+    infile.open("assets/file.txt");
+    while (getline(infile, line)) {
+        std::istringstream iss(line);
+        float itemSz, itemPosX, itemPosY;
+        int Rx, Gx, Bx;
+        iss >> itemSz >> itemPosX >> itemPosY >> Rx >> Gx >> Bx;
+        std::cout << itemSz << " (" << itemPosX << ", " << itemPosY << ") #(" << Rx << Gx << Bx << ")" << std::endl;
+        hud.HUD_items.push_back(If.createItem(sf::Vector2f(itemSz, itemSz), sf::Vector2f(itemPosX, itemPosY), sf::Color(Rx, Gx, Bx)));
+    }
+    // Item* i2 = If.createItem(sf::Vector2f(itemSz, itemSz), sf::Vector2f(itemPosX, itemPosY), sf::Color(Rx, Gx, Bx));
+    // a = *i2;
 
     item.setFillColor(sf::Color::Yellow);
     item.setPosition(250, 250);
@@ -65,6 +82,8 @@ void Game::load()
     hud.HUD_items.push_back(&text);
     hud.HUD_items.push_back(&item);
     hud.HUD_items.push_back(&item2);
+    // hud.HUD_items.push_back(&a);
+    
 }
 
 
