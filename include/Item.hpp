@@ -16,7 +16,7 @@ private:
     //     // target.draw(m_mouseMove, states);
     // }
 public:
-    Item() : sf::RectangleShape(sf::Vector2f(40, 40))
+    Item() : sf::RectangleShape(sf::Vector2f(30, 30))
     {
     }
 
