@@ -22,7 +22,6 @@ public:
 
     Item(const sf::Vector2f &size) : sf::RectangleShape(size)
     {
-
     }
 
     Item(const sf::Vector2f &size, sf::Color color) : sf::RectangleShape(size)
@@ -32,7 +31,6 @@ public:
 
     Item(const sf::Vector2f &size, sf::Vector2f position, sf::Color color) : sf::RectangleShape(size)
     {
-        std::cout << "hello" << std::endl;
         sf::RectangleShape::setPosition(position);
         sf::RectangleShape::setFillColor(color);
     }

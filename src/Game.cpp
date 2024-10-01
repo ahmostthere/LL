@@ -23,11 +23,13 @@ HUD Game::hud;
 
 ItemFactory Game::If;
 
-Item item;
-Item item2(sf::Vector2f(50, 50), sf::Color(0x33, 0x99, 0xaa));
-Item a;
+#include "Map.hpp"
+Map map = Map();
+// Item item;
+// Item item2(sf::Vector2f(50, 50), sf::Color(0x33, 0x99, 0xaa));
+// Item a;
 sf::RectangleShape backpack;
-
+sf::View mainView;
 sf::Font manaFont;
 sf::Text text;
 
@@ -37,7 +39,16 @@ void Game::load()
 {
     m_window.create(sf::VideoMode(WIN_WIDTH, WIN_HEIGHT), "Little Leaf");
     m_window.setVerticalSyncEnabled(true);
-    if (!manaFont.loadFromFile("assets/fonts/retganon.ttf"))
+    mainView = m_window.getView();
+
+// Map testing
+    hud.HUD_items.push_back(&map);
+
+    
+
+
+// Text testing
+        if (!manaFont.loadFromFile("assets/fonts/retganon.ttf"))
     {
         std::cout << "SUCKS" << std::endl;
     }
@@ -47,6 +58,9 @@ void Game::load()
     text.setCharacterSize(36);
     text.setPosition(1500, 350);
 
+
+
+// asset file HUD testing
     std::ifstream infile;
     std::string line;
     infile.open("assets/file.txt");
@@ -61,9 +75,9 @@ void Game::load()
     // Item* i2 = If.createItem(sf::Vector2f(itemSz, itemSz), sf::Vector2f(itemPosX, itemPosY), sf::Color(Rx, Gx, Bx));
     // a = *i2;
 
-    item.setFillColor(sf::Color::Yellow);
-    item.setPosition(250, 250);
-    item2.setPosition(1500, 300);
+    // item.setFillColor(sf::Color::Yellow);
+    // item.setPosition(250, 250);
+    // item2.setPosition(1500, 300);
 
 
 
@@ -73,15 +87,15 @@ void Game::load()
     circle = sf::CircleShape(10);
     circle.setFillColor(sf::Color::Green);
     circle.setPosition(WIN_WIDTH / 2, WIN_HEIGHT / 2);
-    MouseMovable::setTarget(circle);
-    DPadMovable::setTarget(circle);
+    // MouseMovable::setTarget(circle);
+    // DPadMovable::setTarget(circle);
     DPadMovable::setDPad(sf::Keyboard::W, sf::Keyboard::S, sf::Keyboard::A, sf::Keyboard::D);
 
 
     hud.HUD_items.push_back(&circle);
     hud.HUD_items.push_back(&text);
-    hud.HUD_items.push_back(&item);
-    hud.HUD_items.push_back(&item2);
+    // hud.HUD_items.push_back(&item);
+    // hud.HUD_items.push_back(&item2);
     // hud.HUD_items.push_back(&a);
     
 }
@@ -117,6 +131,11 @@ void Game::handleInputs()
             case (sf::Keyboard::Escape):
                 currentGameState = GameState::Quit;
                 break;
+            case (sf::Keyboard::Space):
+                mainView.setCenter(circle.getPosition());
+                m_window.setView(mainView);
+
+                break;
             default:
                 break;
             }
@@ -134,12 +153,17 @@ void Game::handleInputs()
 
 void Game::update()
 {
-    float offset = 250 * m_time.asSeconds();
-    if (DPadMovable::DPadMove(offset)) 
+    float speed = 250 * m_time.asSeconds();
+    sf::Vector2f dmove = DPadMovable::DPadMove() * speed;
+    if (dmove != sf::Vector2f(0, 0)) // != sf::Vector2f(0, 0))
     {
         MouseMovable::resetMouseMoveDestination();
+        circle.move(dmove);
     }
-    else if (MouseMovable::MouseMove(offset)) {;}
+    else 
+    {
+        circle.move(MouseMovable::MouseMove(circle.getPosition()) * speed);
+    }
 }
 
 void Game::render()

@@ -14,6 +14,6 @@ public:
     static void setTarget(sf::Transformable &target);
     static void setMouseMoveDestination(const sf::Vector2i &destinationPosition);
     static void resetMouseMoveDestination();
-    static bool MouseMove(float offset, float minDistance = .1);
-    static bool MouseMove(sf::Transformable &target, float offset, float minDistance = .1);
+    static sf::Vector2f MouseMove(float minDistance = 5);
+    static sf::Vector2f MouseMove(const sf::Vector2f &currentPosition, float minDistance = 5);
 };

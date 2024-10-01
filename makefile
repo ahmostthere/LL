@@ -18,10 +18,6 @@ CFLAGS := -g -Wall
 LIB := -L lib -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 INC := -I include -I assets
 
-TSTDIR := test
-TSTTARG := bin/test
-TSTSRC := $(shell find $(TSTDIR) -type f -name *.$(SRCEXT))
-TSTOBJ := $(patsubst $(TSTDIR)/%,$(BUILDDIR)/%,$(TSTSRC:.$(SRCEXT)=.o))
 
 $(TARGET): $(OBJECTS)
 	@echo " Linking..."
@@ -38,15 +34,5 @@ cl: clean
 clean:
 	@echo " Cleaning..."; 
 	@$(RM) -r $(BUILDDIR) $(TARGET) $(TSTTARG)
-
-# Tests
-t: test
-test: $(TSTOBJ)
-	@$(CC) $(C11) $^ -o $(TSTTARG) $(LIB)
-
-$(BUILDDIR)/%.o: $(TSTDIR)/%.cpp
-	@mkdir -p $(BUILDDIR)
-	@$(CC) $(C11) $(CFLAGS) $(INC) -c -o $@ $<
-
 
 .PHONY: clean
