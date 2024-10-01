@@ -5,7 +5,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
-#include "Item.hpp"
 #include "HUD.hpp"
 #include "ItemFactory.hpp"
 

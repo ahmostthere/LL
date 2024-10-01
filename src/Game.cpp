@@ -25,9 +25,6 @@ ItemFactory Game::If;
 
 #include "Map.hpp"
 Map map = Map();
-// Item item;
-// Item item2(sf::Vector2f(50, 50), sf::Color(0x33, 0x99, 0xaa));
-// Item a;
 sf::RectangleShape backpack;
 sf::View mainView;
 sf::Font manaFont;
@@ -72,12 +69,7 @@ void Game::load()
         std::cout << itemSz << " (" << itemPosX << ", " << itemPosY << ") #(" << Rx << Gx << Bx << ")" << std::endl;
         hud.HUD_items.push_back(If.createItem(sf::Vector2f(itemSz, itemSz), sf::Vector2f(itemPosX, itemPosY), sf::Color(Rx, Gx, Bx)));
     }
-    // Item* i2 = If.createItem(sf::Vector2f(itemSz, itemSz), sf::Vector2f(itemPosX, itemPosY), sf::Color(Rx, Gx, Bx));
-    // a = *i2;
 
-    // item.setFillColor(sf::Color::Yellow);
-    // item.setPosition(250, 250);
-    // item2.setPosition(1500, 300);
 
 
 
@@ -87,16 +79,11 @@ void Game::load()
     circle = sf::CircleShape(10);
     circle.setFillColor(sf::Color::Green);
     circle.setPosition(WIN_WIDTH / 2, WIN_HEIGHT / 2);
-    // MouseMovable::setTarget(circle);
-    // DPadMovable::setTarget(circle);
     DPadMovable::setDPad(sf::Keyboard::W, sf::Keyboard::S, sf::Keyboard::A, sf::Keyboard::D);
 
 
     hud.HUD_items.push_back(&circle);
     hud.HUD_items.push_back(&text);
-    // hud.HUD_items.push_back(&item);
-    // hud.HUD_items.push_back(&item2);
-    // hud.HUD_items.push_back(&a);
     
 }
 
@@ -157,7 +144,7 @@ void Game::update()
     sf::Vector2f dmove = DPadMovable::DPadMove() * speed;
     if (dmove != sf::Vector2f(0, 0)) // != sf::Vector2f(0, 0))
     {
-        MouseMovable::resetMouseMoveDestination();
+        MouseMovable::unsetMouseMoveDestination();
         circle.move(dmove);
     }
     else 
