@@ -19,6 +19,7 @@ Game::GameState Game::currentGameState;
 
 // ============ TEST ==================
 sf::CircleShape Game::circle;
+sf::CircleShape circ_mouse;
 HUD Game::hud;
 
 ItemFactory Game::If;
@@ -29,6 +30,7 @@ sf::RectangleShape backpack;
 sf::View mainView;
 sf::Font manaFont;
 sf::Text text;
+bool toggleCenter = false;
 
 // ============ TEST ==================
 
@@ -37,15 +39,14 @@ void Game::load()
     m_window.create(sf::VideoMode(WIN_WIDTH, WIN_HEIGHT), "Little Leaf");
     m_window.setVerticalSyncEnabled(true);
     mainView = m_window.getView();
-
 // Map testing
-    hud.HUD_items.push_back(&map);
+    hud.addItem(&map);
 
     
 
 
 // Text testing
-        if (!manaFont.loadFromFile("assets/fonts/retganon.ttf"))
+    if (!manaFont.loadFromFile("assets/fonts/retganon.ttf"))
     {
         std::cout << "SUCKS" << std::endl;
     }
@@ -67,7 +68,7 @@ void Game::load()
         int Rx, Gx, Bx;
         iss >> itemSz >> itemPosX >> itemPosY >> Rx >> Gx >> Bx;
         std::cout << itemSz << " (" << itemPosX << ", " << itemPosY << ") #(" << Rx << Gx << Bx << ")" << std::endl;
-        hud.HUD_items.push_back(If.createItem(sf::Vector2f(itemSz, itemSz), sf::Vector2f(itemPosX, itemPosY), sf::Color(Rx, Gx, Bx)));
+        hud.addItem(If.createItem(sf::Vector2f(itemSz, itemSz), sf::Vector2f(itemPosX, itemPosY), sf::Color(Rx, Gx, Bx)));
     }
 
 
@@ -78,12 +79,16 @@ void Game::load()
 
     circle = sf::CircleShape(10);
     circle.setFillColor(sf::Color::Green);
+
+    circ_mouse = sf::CircleShape(5);
+    circ_mouse.setFillColor(sf::Color::Red);
     circle.setPosition(WIN_WIDTH / 2, WIN_HEIGHT / 2);
     DPadMovable::setDPad(sf::Keyboard::W, sf::Keyboard::S, sf::Keyboard::A, sf::Keyboard::D);
 
 
-    hud.HUD_items.push_back(&circle);
-    hud.HUD_items.push_back(&text);
+    hud.addItem(&circ_mouse);
+    hud.addItem(&circle);
+    hud.addItem(&text);
     
 }
 
@@ -108,20 +113,22 @@ void Game::handleInputs()
         switch (currentEvent.type)
         {
         case sf::Event::Closed:
-            std::cout << "closing" << std::endl;
             currentGameState = GameState::Quit;
             break;
         case sf::Event::KeyPressed:
-            // std::cout << "key pressed" << std::endl;
             switch (currentEvent.key.code)
             {
             case (sf::Keyboard::Escape):
                 currentGameState = GameState::Quit;
                 break;
             case (sf::Keyboard::Space):
-                mainView.setCenter(circle.getPosition());
-                m_window.setView(mainView);
-
+                toggleCenter = !toggleCenter;            
+                break;
+            case (sf::Keyboard::B):
+                std::cout << "circle pos: " << circle.getPosition().x << ", " << circle.getPosition().y << std::endl;
+                std::cout << "viewcenter pos: " << mainView.getCenter().x << ", " << mainView.getCenter().y << std::endl;
+                std::cout << "defaultviewcenter pos: " << m_window.getDefaultView().getCenter().x << ", " << m_window.getDefaultView().getCenter().y << std::endl;
+                
                 break;
             default:
                 break;
@@ -130,7 +137,10 @@ void Game::handleInputs()
         case sf::Event::MouseButtonPressed:
             if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
             {
-                MouseMovable::setMouseMoveDestination(sf::Mouse::getPosition(m_window));
+                sf::Vector2f dest_pos = sf::Vector2f(sf::Mouse::getPosition(m_window).x + mainView.getCenter().x - m_window.getDefaultView().getCenter().x,
+                                                     sf::Mouse::getPosition(m_window).y + mainView.getCenter().y - m_window.getDefaultView().getCenter().y);
+                MouseMovable::setMouseMoveDestination(dest_pos);
+                circ_mouse.setPosition(dest_pos); // set destination position marker (red dot)
             }
         default:
             break;
@@ -142,7 +152,7 @@ void Game::update()
 {
     float speed = 250 * m_time.asSeconds();
     sf::Vector2f dmove = DPadMovable::DPadMove() * speed;
-    if (dmove != sf::Vector2f(0, 0)) // != sf::Vector2f(0, 0))
+    if (dmove != sf::Vector2f(0, 0))
     {
         MouseMovable::unsetMouseMoveDestination();
         circle.move(dmove);
@@ -151,16 +161,20 @@ void Game::update()
     {
         circle.move(MouseMovable::MouseMove(circle.getPosition()) * speed);
     }
+
+    if (toggleCenter)
+    {
+        mainView.setCenter(circle.getPosition());
+        m_window.setView(mainView);
+    }
 }
 
 void Game::render()
 {
     m_window.clear();
-    // m_window.draw(item);
-    // m_window.draw(circle);
-    // m_window.draw(item2);
-    // m_window.draw(text);
-    m_window.draw(hud);
+    // draw map
+    // draw objects in order of y axis (billboarding)
+    m_window.draw(hud); // this will be last thing to draw
     m_window.display();
 }
 
