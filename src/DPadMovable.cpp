@@ -21,38 +21,10 @@ sf::Vector2f DPadMovable::DPadMove()
         bool move = false;
         float theta = PI * 1 / 2;
         int code = 0;
-        if (sf::Keyboard::isKeyPressed(upKey))
-        {
-            code |= 1;
-        }
-        else
-        {
-            code &= ~1;
-        }
-        if (sf::Keyboard::isKeyPressed(leftKey))
-        {
-            code |= 2;
-        }
-        else
-        {
-            code &= ~2;
-        }
-        if (sf::Keyboard::isKeyPressed(downKey))
-        {
-            code |= 4;
-        }
-        else
-        {
-            code &= ~4;
-        }
-        if (sf::Keyboard::isKeyPressed(rightKey))
-        {
-            code |= 8;
-        }
-        else
-        {
-            code &= ~8;
-        }
+        code = (sf::Keyboard::isKeyPressed(upKey) ? (code | 1) : (code & ~1));
+        code = (sf::Keyboard::isKeyPressed(leftKey) ? (code | 2) : (code & ~2));
+        code = (sf::Keyboard::isKeyPressed(downKey) ? (code | 4) : (code & ~4));
+        code = (sf::Keyboard::isKeyPressed(rightKey) ? (code | 8) : (code & ~8));
 
         switch (code)
         {
@@ -102,9 +74,9 @@ sf::Vector2f DPadMovable::DPadMove()
         default: // nothing
             break;
         }
-        if (move) {
+        if (move)
+        {
             return sf::Vector2f(std::cos(theta), std::sin(theta));
-            
         }
         return sf::Vector2f(0,0);
 }

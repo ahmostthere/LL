@@ -9,7 +9,7 @@ private:
     static bool m_isDestSet;
 
 public:
-    static void setMouseMoveDestination(const sf::Vector2i &destinationPosition);
+    static void setMouseMoveDestination(const sf::Vector2f &destinationPosition);
     static void unsetMouseMoveDestination();
     static sf::Vector2f MouseMove(const sf::Vector2f &currentPosition, float minDistance = 5);
 };

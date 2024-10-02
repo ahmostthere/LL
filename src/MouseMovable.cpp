@@ -19,9 +19,9 @@ float getDistance(const sf::Vector2f &a, const sf::Vector2f &b)
     return sqrt((c.x * c.x) + (c.y * c.y));
 }
 
-void MouseMovable::setMouseMoveDestination(const sf::Vector2i &destinationPosition)
+void MouseMovable::setMouseMoveDestination(const sf::Vector2f &destinationPosition)
 {
-    m_destinationPosition = sf::Vector2f(destinationPosition);
+    m_destinationPosition = destinationPosition;
     m_isDestSet = true;
 }
 
