@@ -1,6 +1,7 @@
 #include "Game.hpp"
 #include "DPadMovable.hpp"
 #include "MouseMovable.hpp"
+#include <nlohmann/json.hpp>
 
 #include <iostream>
 #include <sstream>
@@ -55,8 +56,7 @@ void Game::load()
     text.setFillColor(sf::Color::White);
     text.setCharacterSize(36);
     text.setPosition(1500, 350);
-
-
+    std::cout << text.getLocalBounds().width << ", h: " << text.getLocalBounds().height << std::endl;
 
 // asset file HUD testing
     std::ifstream infile;

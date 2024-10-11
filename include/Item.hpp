@@ -3,6 +3,7 @@
 // #include <SFML/Graphics/Drawable.hpp>
 // #include <SFML/Graphics/Transformable.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <nlohmann/json.hpp>
 #include <iostream>
 
 // class Item : public sf::Drawable, public sf::Transformable
