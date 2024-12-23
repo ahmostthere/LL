@@ -7,6 +7,7 @@
 
 #include "HUD.hpp"
 #include "ItemFactory.hpp"
+#include "Inventory.hpp"
 
 class Game
 {

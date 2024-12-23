@@ -5,7 +5,8 @@ C11 := -std=c++11
 # CC := clang --analyze # and comment out the linker last line for sanity
 SRCDIR := src
 BUILDDIR := build
-TARGET := bin/main
+# TARGET := bin/main
+TARGET := run
 
  
 SRCEXT := cpp
@@ -33,6 +34,6 @@ c: cl
 cl: clean
 clean:
 	@echo " Cleaning..."; 
-	@$(RM) -r $(BUILDDIR) $(TARGET) $(TSTTARG)
+	@$(RM) -r $(BUILDDIR) $(TARGET)
 
 .PHONY: clean

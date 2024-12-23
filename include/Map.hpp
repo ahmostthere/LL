@@ -10,6 +10,7 @@ class Map : public sf::Drawable, public sf::Transformable
 {
 public:
     std::vector<sf::RectangleShape> map;
+
     Map() {
         std::cout << "hello map" << std::endl;
         sf::Vector2f pos = sf::Transformable::getPosition();
@@ -26,6 +27,23 @@ public:
                 tile.setFillColor(sf::Color(115, 195, 95));
                 tile.setOutlineColor(sf::Color(75, 145, 55));
                 tile.setOutlineThickness(1);
+                map.push_back(tile);
+            }
+        }
+    }
+    
+    Map(int row, int col, int sz = 49, int bsz = 1) {
+        sf::Vector2f size(sz, sz);
+
+        for (int r = 0; r < row; r++)
+        {
+            for (int c = 0; c < col; c++)
+            {
+                sf::RectangleShape tile(size);
+                tile.setPosition(sf::Transformable::getPosition() + sf::Vector2f(c * (sz + bsz), r * (sz + bsz)));
+                tile.setFillColor(sf::Color(115, 195, 95));
+                tile.setOutlineColor(sf::Color(75, 145, 55));
+                tile.setOutlineThickness(bsz);
                 map.push_back(tile);
             }
         }
