@@ -1,19 +1,15 @@
 #pragma once
-#include "Item.hpp"
+#include <EntityFactory.hpp>
+#include <ItemEntity.hpp>
 #include <iostream>
-class ItemFactory 
+#include <memory>
+
+class ItemFactory : public EntityFactory
 {
-private:
-
 public:
-    ~ItemFactory() 
-    {
 
-    }
-    Item *createItem(const sf::Vector2f &size, sf::Vector2f position, sf::Color color) 
-    {
-
-        std::cout << "hi" << std::endl;
-        return new Item(size, position, color);
-    }
+    // static Item* createEntity(const sf::Vector2f &size, sf::Vector2f position, sf::Color color) 
+    // {
+        // return std::unique_ptr<Item>( new Item(size, position, color));
+    // }
 };

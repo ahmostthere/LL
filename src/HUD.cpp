@@ -6,9 +6,9 @@ HUD::HUD()
     
 }
 
-void HUD::addItem(sf::Drawable* item)
+void HUD::addComponent(sf::Drawable* component)
 {
-    HUD_items.push_back(item);
+    HUD_items.push_back(component);
 }
 
 std::vector<sf::Drawable*> HUD::HUD_items;

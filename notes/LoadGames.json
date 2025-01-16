@@ -1,0 +1,27 @@
+{
+    "gameSettings": {
+        "title": "LittleLeaf", 
+        "windowSize": [1920, 1080],
+        "cameraSpeed": 200
+    },
+    "entities": [
+        {
+            "entityId": 10000001,
+            "entityType": "player",
+            "position": [0, 0],
+            "size": 5,
+            "color": [0, 0, 255, 255]
+        },
+        {
+            "entityId": 10000002,
+            "entityType": "npc",
+            "size": 30,
+            "position": [0, 0]
+        },
+        {
+            "entityId": 10000003,
+            "entityType": "collectible",
+            "position": [0, 0]
+        }
+    ]
+}

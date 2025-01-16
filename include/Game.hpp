@@ -5,9 +5,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
-#include "HUD.hpp"
-#include "ItemFactory.hpp"
-#include "Inventory.hpp"
 
 class Game
 {
@@ -22,10 +19,6 @@ private:
     static sf::Clock m_clock;
     static sf::Time m_time;
     static GameState currentGameState;
-
-    static sf::CircleShape circle;
-    static HUD hud;
-    static ItemFactory If;
 
     static void load();
     static void loop();

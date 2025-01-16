@@ -8,7 +8,7 @@ class HUD : public sf::Drawable
 {
 public:
     HUD();
-    static void addItem(sf::Drawable *item);
+    static void addComponent(sf::Drawable *component);
     static std::vector<sf::Drawable *> HUD_items;
 
 private:

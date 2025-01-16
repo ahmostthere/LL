@@ -1,9 +1,9 @@
 #pragma once
 #include <vector>
-#include <Item.hpp>
+#include <Entity.hpp>
+#include <ItemEntity.hpp>
 
-class Inventory
-{
+class Inventory {
 public:
-    std::vector<Item> items;
+    std::vector<ItemEntity> items;
 };

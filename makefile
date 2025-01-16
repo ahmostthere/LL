@@ -1,7 +1,7 @@
 
 
 CC := g++
-C11 := -std=c++11
+C11 := -std=c++14
 # CC := clang --analyze # and comment out the linker last line for sanity
 SRCDIR := src
 BUILDDIR := build
