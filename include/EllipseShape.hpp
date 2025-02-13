@@ -1,17 +1,17 @@
 #pragma once
 #include <SFML/Graphics/Export.hpp>
 #include <SFML/Graphics/Shape.hpp>
+#include <SFML/System/Vector2.hpp>
 #include <cstddef>
 #include <cmath>
 #include <iostream>
 #define PI std::acos(-1)
 
-class RoundedRectShape : public sf::Shape {
+class EllipseShape : public sf::Shape {
 public:
-    explicit RoundedRectShape(sf::Vector2f size = sf::Vector2f(0,0), float radius = 0);
-    void setRadius(float radius);
-    float getRadius() const;
-    void setSize(sf::Vector2f size);
+    explicit EllipseShape(sf::Vector2f radii = sf::Vector2f(0,0));
+    void setRadii(sf::Vector2f radii);
+    sf::Vector2f getRadii() const;
     sf::Vector2f getSize() const;
     void setPointCount(std::size_t count);
     std::size_t getPointCount() const override;
@@ -19,7 +19,7 @@ public:
     sf::Vector2f getGeometricCenter() const;
 
 private:
-    sf::Vector2f m_size;
-    float m_radius;
+    sf::Vector2f m_radii;
     std::size_t m_pointCount;
 };
+

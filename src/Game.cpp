@@ -1,6 +1,5 @@
 #include "Game.hpp"
 
-
 #include <ctime>
 #include <iostream>
 #include <sstream>
@@ -63,8 +62,8 @@ GameSettings gameSettings;
 HPBar hpbar; 
 
 #include "RoundedRectShape.hpp"
-
 RoundedRectShape backpack;
+
 // ============ TEST END ==================
 
 void Game::load() {
@@ -120,6 +119,7 @@ void Game::load() {
 // Round Rectangle 
     backpack = j.at("backpack");
     hud.addComponent(&backpack);
+
 }
 
 
@@ -158,7 +158,27 @@ void Game::handleInputs() {
                 break;
             }
 
-            case (sf::Keyboard::R):
+            case (sf::Keyboard::Y):
+                if (camBound.isShowBound)
+                {
+                    camBound.hideBound();
+                }
+                else
+                {
+                    camBound.showBound();
+                }
+                break;
+            
+            case (sf::Keyboard::T): // toggle boundary lock
+                if (camBound.bound) {
+                    camBound.unboundSubject();
+                } else {
+                    camBound.boundSubject();
+                }
+                break;
+
+            case (sf::Keyboard::F):
+                player.printFace();
                 break;
  
             case (sf::Keyboard::I):

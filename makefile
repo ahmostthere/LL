@@ -22,7 +22,7 @@ INC := -I include -I assets
 
 $(TARGET): $(OBJECTS)
 	@echo " Linking..."
-	@$(CC) $(C11) $^ -o $(TARGET) $(LIB)
+	@$(CC) $(C11) $^ -o $(TARGET) $(LIB) -v
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(dir $(OBJECTS))

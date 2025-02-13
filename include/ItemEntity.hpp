@@ -1,12 +1,14 @@
 #pragma once
 #include <Entity.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
+#include <EllipseShape.hpp>
 #include <iostream>
 
 
 class ItemEntity : public Entity {
 private:
     sf::RectangleShape m_rect;
+    EllipseShape m_ellipse;
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const {
         target.draw(m_rect, states);
     }

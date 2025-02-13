@@ -8,6 +8,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <RoundedRectShape.hpp>
+// #include <EllipseShape.hpp>
 #include <ItemEntity.hpp>
 #include <ItemFactory.hpp>
 #include <Inventory.hpp>
@@ -113,6 +114,8 @@ void from_json(const json &j, GameSettings &gs) {
     j.at("fontFile").get_to(gs.fontFile);
 }
 
+
+
 void to_json(json &j, const PlayerSettings &ps) {
     j["player"] = {
         { "speed", ps.speed },
@@ -144,6 +147,21 @@ void from_json(const json &j, RoundedRectShape &rr) {
     rr.setPosition(j.at("position").get<sf::Vector2f>());
     rr.setFillColor(j.at("color").get<sf::Color>());
 }
+
+
+// ============================= EllipseShape =============================
+// void to_json(json &j, const EllipseShape &es) {
+//     j["radii"] = es.getRadii();
+//     j["size"] = es.getSize();
+//     j["position"] = es.getPosition();
+//     j["color"] = es.getFillColor();
+// }
+
+// void from_json(const json &j, EllipseShape &es) {
+//     es.setRadii(j.at("radii").get<sf::Vector2f>());
+//     es.setPosition(j.at("position").get<sf::Vector2f>());
+//     es.setFillColor(j.at("color").get<sf::Color>());
+// }
 
 
 // ============================= Entity =============================

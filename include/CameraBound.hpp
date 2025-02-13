@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Time.hpp>
 #include <cmath>
-#include <iostream>
+
 
 class CameraBound : public sf::Drawable, public sf::Transformable {
 public:
@@ -11,63 +11,35 @@ public:
     sf::Vector2f size;
     float speed;
     sf::RectangleShape r;
+    bool bound;
+    bool isShowBound;
 
 
-    CameraBound(sf::Vector2f wSz, float spd = 200) : windowSize(wSz), size(sf::Vector2f(wSz.x/8, wSz.y/8)), speed(spd) {
-        this->setPosition(sf::Vector2f((windowSize.x - size.x) / 2, (windowSize.y - size.y) / 2));
-        r.setFillColor(sf::Color(100, 100, 255, 0));
-        r.setOutlineColor(sf::Color(80, 80, 255, 10));
-        r.setPosition(this->getPosition());
-        r.setSize(size);
-    }
+    CameraBound(sf::Vector2f wSz, float spd = 200);
 
+    void unboundSubject();
 
-    void update(sf::Time time) {
-        if (getPosition().x + getSize().x <= m_subject->getPosition().x + m_subject->getRadius() || getPosition().x >= m_subject->getPosition().x - m_subject->getRadius()) {
-            move(sf::Vector2f(m_subject->DPadMove().x, 0) * m_subject->getSpeed() * time.asSeconds());
-            m_cameraView->move(sf::Vector2f(m_subject->DPadMove().x, 0) * m_subject->getSpeed() * time.asSeconds());
-        }
+    void boundSubject();
 
-        if (getPosition().y + getSize().y <= m_subject->getPosition().y + m_subject->getRadius() || getPosition().y >= m_subject->getPosition().y - m_subject->getRadius()) {
-            move(sf::Vector2f(0, m_subject->DPadMove().y) * m_subject->getSpeed() * time.asSeconds());
-            m_cameraView->move(sf::Vector2f(0, m_subject->DPadMove().y) * m_subject->getSpeed() * time.asSeconds());
-        }
+    void showBound();
+    
+    void hideBound();
 
-        centerSubject(time);
-    }
+    void setSubject(PlayerEntity* subject);
 
-    void centerSubject(sf::Time time) {
-        auto theta = [](const sf::Vector2f &a, const sf::Vector2f &b) {
-            sf::Vector2f c(a.x - b.x, a.y - b.y);
-            return std::atan2(c.y, c.x);
-        };
+    void setCameraView(sf::View* view);
 
-        auto dis = [](const sf::Vector2f &a, const sf::Vector2f &b) { 
-            sf::Vector2f c(a.x - b.x, a.y - b.y);
-            return sqrt((c.x * c.x) + (c.y * c.y));
-        };
-        if (m_subject->DPadMove() == sf::Vector2f(0, 0) && dis(m_subject->getPosition(), m_cameraView->getCenter()) > 5) {
-            float th = theta(m_subject->getPosition(), m_cameraView->getCenter());
-            m_cameraView->move(sf::Vector2f(std::cos(th), std::sin(th)) * speed * time.asSeconds());
-            move(sf::Vector2f(std::cos(th), std::sin(th)) * speed * time.asSeconds());
-        }
-    }
+    void boundVertical(sf::Time time);
 
-    void setCameraView(sf::View* view) {
-        m_cameraView = view;
-    }
+    void boundHorizontal(sf::Time time);
 
-    void setSubject(PlayerEntity* subject) {
-        m_subject = subject;
-    }
+    void panToSubject(sf::Time time);
 
-    const sf::Vector2f& getSize() const {
-        return size;
-    }
+    void update(sf::Time time);
 
-    const sf::Vector2f& getWindowSize() const {
-        return windowSize;
-    }
+    const sf::Vector2f& getSize() const;
+
+    const sf::Vector2f& getWindowSize() const;
 
 
 private:
@@ -76,6 +48,9 @@ private:
 
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const
     {
-        target.draw(r);
+        if (isShowBound)
+        {
+            target.draw(r);
+        }
     }
 };

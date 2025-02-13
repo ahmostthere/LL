@@ -12,7 +12,7 @@ public:
     float tileSize;
     float outlineThickness;
     
-    Map(int row = 50, int col = 50, int sz = 72, int thickness = 1) : rows(row), columns(col), tileSize(sz), outlineThickness(thickness) {
+    Map(int row = 50, int col = 50, int sz = 50, int thickness = 1) : rows(row), columns(col), tileSize(sz), outlineThickness(thickness) {
         sf::Vector2f size(tileSize - outlineThickness, tileSize - outlineThickness);
 
         for (int r = 0; r < rows; r++) {
