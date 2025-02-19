@@ -1,13 +1,8 @@
 #include "HUD.hpp"
 
+HUD::HUD() {}
 
-HUD::HUD() 
-{
-    
-}
-
-void HUD::addComponent(sf::Drawable* component)
-{
+void HUD::addComponent(sf::Drawable* component) {
     HUD_items.push_back(component);
 }
 

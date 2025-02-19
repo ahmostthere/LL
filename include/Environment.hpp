@@ -1,14 +1,13 @@
 #pragma once
 
-#include <SFML/Graphics/RenderTarget.hpp>
-#include <SFML/Graphics/Drawable.hpp>
 #include <Entity.hpp>
-#include <vector>
+#include <SFML/Graphics/Drawable.hpp>
+#include <SFML/Graphics/RenderTarget.hpp>
 #include <iostream>
 #include <memory>
+#include <vector>
 
-class Environment : public sf::Drawable
-{
+class Environment : public sf::Drawable {
 public:
     Environment();
     ~Environment();
@@ -16,10 +15,8 @@ public:
     static std::vector<Entity*> Entities;
 
 private:
-    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const
-    {
-        for (int i = 0; i < Entities.size(); i++)
-        {
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const {
+        for (int i = 0; i < Entities.size(); i++) {
             target.draw(*Entities[i], states);
         }
     }

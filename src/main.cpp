@@ -1,8 +1,7 @@
 #include <iostream>
 #include "Game.hpp"
 
-int main()
-{
+int main() {
     Game::start();
     return 0;
 }

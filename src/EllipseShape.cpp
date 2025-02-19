@@ -1,5 +1,5 @@
 #include <EllipseShape.hpp>
-
+#define PI std::acos(-1)
 
 EllipseShape::EllipseShape(sf::Vector2f radii) : m_radii(radii) {
     m_pointCount = 32;
@@ -30,7 +30,8 @@ std::size_t EllipseShape::getPointCount() const {
 
 sf::Vector2f EllipseShape::getPoint(std::size_t index) const {
     float theta = index / float(m_pointCount) * PI * 2;
-    return m_radii + sf::Vector2f(m_radii.x * std::cos(theta), m_radii.y * std::sin(theta));
+    return m_radii + sf::Vector2f(m_radii.x * std::cos(theta),
+                                  m_radii.y * std::sin(theta));
 }
 
 sf::Vector2f EllipseShape::getGeometricCenter() const {

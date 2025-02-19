@@ -1,14 +1,15 @@
 #pragma once
 #include <SFML/Graphics/Export.hpp>
 #include <SFML/Graphics/Shape.hpp>
-#include <cstddef>
 #include <cmath>
+#include <cstddef>
 #include <iostream>
 #define PI std::acos(-1)
 
 class RoundedRectShape : public sf::Shape {
 public:
-    explicit RoundedRectShape(sf::Vector2f size = sf::Vector2f(0,0), float radius = 0);
+    explicit RoundedRectShape(sf::Vector2f size = sf::Vector2f(0, 0),
+                              float radius = 0);
     void setRadius(float radius);
     float getRadius() const;
     void setSize(sf::Vector2f size);

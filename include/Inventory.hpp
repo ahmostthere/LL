@@ -1,7 +1,8 @@
 #pragma once
-#include <vector>
+
 #include <Entity.hpp>
 #include <ItemEntity.hpp>
+#include <vector>
 
 class Inventory {
 public:

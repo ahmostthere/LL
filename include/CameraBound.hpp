@@ -4,7 +4,6 @@
 #include <SFML/System/Time.hpp>
 #include <cmath>
 
-
 class CameraBound : public sf::Drawable, public sf::Transformable {
 public:
     sf::Vector2f windowSize;
@@ -13,7 +12,7 @@ public:
     sf::RectangleShape r;
     bool bound;
     bool isShowBound;
-
+    bool isPanToSubject;
 
     CameraBound(sf::Vector2f wSz, float spd = 200);
 
@@ -22,12 +21,12 @@ public:
     void boundSubject();
 
     void showBound();
-    
+
     void hideBound();
 
-    void setSubject(PlayerEntity* subject);
+    void setSubject(PlayerEntity *subject);
 
-    void setCameraView(sf::View* view);
+    void setCameraView(sf::View *view);
 
     void boundVertical(sf::Time time);
 
@@ -37,19 +36,16 @@ public:
 
     void update(sf::Time time);
 
-    const sf::Vector2f& getSize() const;
+    const sf::Vector2f &getSize() const;
 
-    const sf::Vector2f& getWindowSize() const;
-
+    const sf::Vector2f &getWindowSize() const;
 
 private:
-    sf::View* m_cameraView;
-    PlayerEntity* m_subject;
+    sf::View *m_cameraView;
+    PlayerEntity *m_subject;
 
-    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const
-    {
-        if (isShowBound)
-        {
+    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const {
+        if (isShowBound) {
             target.draw(r);
         }
     }

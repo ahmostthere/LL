@@ -1,19 +1,13 @@
 #pragma once
 
+#include <SFML/Audio.hpp>
+#include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
 
-
-class Game
-{
+class Game {
 private:
-    enum GameState
-    {
-        Play,
-        Quit
-    };
+    enum GameState { Play, Quit };
 
     static sf::RenderWindow m_window;
     static sf::Clock m_clock;
