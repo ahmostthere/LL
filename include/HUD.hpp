@@ -11,9 +11,5 @@ public:
     static std::vector<sf::Drawable *> HUD_items;
 
 private:
-    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const {
-        for (int i = 0; i < HUD_items.size(); i++) {
-            target.draw(*HUD_items[i], states);
-        }
-    }
+    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };

@@ -1,4 +1,5 @@
 #include <EllipseShape.hpp>
+#include <cmath>
 #define PI std::acos(-1)
 
 EllipseShape::EllipseShape(sf::Vector2f radii) : m_radii(radii) {

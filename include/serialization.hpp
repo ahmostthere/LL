@@ -122,14 +122,14 @@ void from_json(const json &j, PlayerSettings &ps) {
 // ============================= RoundRectangle =============================
 void to_json(json &j, const RoundedRectShape &rr) {
     j["size"] = rr.getSize();
-    j["radius"] = rr.getRadius();
+    j["cornerRadius"] = rr.getCornerRadius();
     j["position"] = rr.getPosition();
     j["color"] = rr.getFillColor();
 }
 
 void from_json(const json &j, RoundedRectShape &rr) {
     rr.setSize(j.at("size").get<sf::Vector2f>());
-    rr.setRadius(j.at("radius").get<float>());
+    rr.setCornerRadius(j.at("cornerRadius").get<float>());
     rr.setPosition(j.at("position").get<sf::Vector2f>());
     rr.setFillColor(j.at("color").get<sf::Color>());
 }

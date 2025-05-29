@@ -1,29 +1,29 @@
 #include <RoundedRectShape.hpp>
 
-RoundedRectShape::RoundedRectShape(sf::Vector2f size, float radius)
-: m_size(size), m_radius(radius) {
+RoundedRectShape::RoundedRectShape(sf::Vector2f size, float cornerRadius)
+: m_size(size),
+  m_cornerRadius(cornerRadius),
+  m_pointCount(m_cornerRadius ? 52 : 4) {
     auto min = [](float a, float b) { return (a < b) ? a : b; };
     sf::Vector2f halfSize = m_size / 2.f;
-    m_radius = (m_radius > min(halfSize.x, halfSize.y))
-                   ? min(halfSize.x, halfSize.y)
-                   : radius;
-    m_pointCount = (m_radius == 0) ? 4 : 52;
+    m_cornerRadius = (cornerRadius > min(halfSize.x, halfSize.y))
+                         ? min(halfSize.x, halfSize.y)
+                         : cornerRadius;
     update();
 }
 
-void RoundedRectShape::setRadius(float radius) {
+void RoundedRectShape::setCornerRadius(float cornerRadius) {
     auto min = [](float a, float b) { return (a < b) ? a : b; };
     sf::Vector2f halfSize = m_size / 2.f;
-    m_radius = (m_radius > min(halfSize.x, halfSize.y))
-                   ? min(halfSize.x, halfSize.y)
-                   : radius;
-    m_pointCount = (m_radius == 0) ? 4 : 52;
-
+    m_cornerRadius = (m_cornerRadius > min(halfSize.x, halfSize.y))
+                         ? min(halfSize.x, halfSize.y)
+                         : cornerRadius;
+    m_pointCount = (m_cornerRadius == 0) ? 4 : 52;
     update();
 }
 
-float RoundedRectShape::getRadius() const {
-    return m_radius;
+float RoundedRectShape::getCornerRadius() const {
+    return m_cornerRadius;
 }
 
 void RoundedRectShape::setSize(sf::Vector2f size) {
@@ -60,20 +60,21 @@ sf::Vector2f RoundedRectShape::getPoint(std::size_t index) const {
     } else {
         std::size_t i = (index) / (m_pointCount / 4);
         float theta = (((index - i) / float(m_pointCount - 4)) * PI * 2) + PI;
-        sf::Vector2f ret = sf::Vector2f(m_radius * std::cos(theta),
-                                        m_radius * std::sin(theta));
+        sf::Vector2f ret = sf::Vector2f(m_cornerRadius * std::cos(theta),
+                                        m_cornerRadius * std::sin(theta));
         switch (i) {
             default:
             case 0:
-                return ret + sf::Vector2f(m_radius, m_radius);
+                return ret + sf::Vector2f(m_cornerRadius, m_cornerRadius);
             case 1:
-                return ret + sf::Vector2f(m_size.x - m_radius, m_radius);
-            case 2:
                 return ret +
-                       sf::Vector2f(m_size.x - m_radius, m_size.y - m_radius);
+                       sf::Vector2f(m_size.x - m_cornerRadius, m_cornerRadius);
+            case 2:
+                return ret + sf::Vector2f(m_size.x - m_cornerRadius,
+                                          m_size.y - m_cornerRadius);
             case 3:
-                return ret + sf::Vector2f(m_radius, m_size.y - m_radius);
-                ;
+                return ret +
+                       sf::Vector2f(m_cornerRadius, m_size.y - m_cornerRadius);
         }
     }
 }

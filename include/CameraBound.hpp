@@ -44,9 +44,5 @@ private:
     sf::View *m_cameraView;
     PlayerEntity *m_subject;
 
-    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const {
-        if (isShowBound) {
-            target.draw(r);
-        }
-    }
+    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };

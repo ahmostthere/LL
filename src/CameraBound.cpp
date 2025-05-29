@@ -96,3 +96,9 @@ const sf::Vector2f &CameraBound::getSize() const {
 const sf::Vector2f &CameraBound::getWindowSize() const {
     return windowSize;
 }
+
+void CameraBound::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    if (isShowBound) {
+        target.draw(r);
+    }
+}

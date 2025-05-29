@@ -15,7 +15,7 @@ PlayerEntity::PlayerEntity() {
     m_face.setOrigin(5, 80);
 
     m_rect.setSize(sf::Vector2f(50, 80));
-    m_rect.setRadius(15);
+    m_rect.setCornerRadius(15);
     m_rect.setFillColor(sf::Color(15, 115, 225));
     m_rect.setOrigin(50 / 2, 80);
 

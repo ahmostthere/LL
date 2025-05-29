@@ -20,3 +20,9 @@ Map::Map(int row, int col, int sz, int thickness)
 }
 
 void Map::update(sf::Time time) {}
+
+void Map::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    for (int i = 0; i < map.size(); i++) {
+        target.draw(map[i]);
+    }
+}

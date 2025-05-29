@@ -17,9 +17,5 @@ public:
     void update(sf::Time time);
 
 private:
-    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const {
-        for (int i = 0; i < map.size(); i++) {
-            target.draw(map[i]);
-        }
-    }
+    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };

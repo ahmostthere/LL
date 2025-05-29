@@ -1,0 +1,11 @@
+{
+    "items": [],
+    "settings": {
+        "cameraSpeed": 200.0,
+        "fontFile": "assets/fonts/retganon.ttf",
+        "height": 1080,
+        "playerSettingsFile": "assets/saves/p1.json",
+        "title": "Little Leaf",
+        "width": 1920
+    }
+}

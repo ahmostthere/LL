@@ -1,0 +1,44 @@
+{
+    "items": [
+        [
+            "position",
+            {
+                "x": 0.0,
+                "y": 0.0
+            }
+        ],
+        [
+            "position",
+            {
+                "x": 0.0,
+                "y": 0.0
+            }
+        ],
+        [
+            "position",
+            {
+                "x": 0.0,
+                "y": 0.0
+            }
+        ],
+        [
+            "position",
+            {
+                "x": 0.0,
+                "y": 0.0
+            }
+        ],
+        [
+            "position",
+            {
+                "x": 0.0,
+                "y": 0.0
+            }
+        ]
+    ],
+    "settings": {
+        "height": 1080,
+        "title": "Little Leaf",
+        "width": 1920
+    }
+}

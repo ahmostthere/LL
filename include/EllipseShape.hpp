@@ -3,7 +3,6 @@
 #include <SFML/Graphics/Export.hpp>
 #include <SFML/Graphics/Shape.hpp>
 #include <SFML/System/Vector2.hpp>
-#include <cmath>
 #include <cstddef>
 
 class EllipseShape : public sf::Shape {
